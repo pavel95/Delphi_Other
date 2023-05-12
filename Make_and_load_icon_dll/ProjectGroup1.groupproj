@@ -3,10 +3,10 @@
         <ProjectGuid>{79FE7260-9D4A-4B19-898D-987CBC50EC3B}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="pLoadIconDll.dproj">
+        <Projects Include="MakeIconDll\pMakeIconDll.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="MakeIconDll\pMakeIconDll.dproj">
+        <Projects Include="LoadIconDll\pLoadIconDll.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,15 +17,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="pLoadIconDll">
-        <MSBuild Projects="pLoadIconDll.dproj"/>
-    </Target>
-    <Target Name="pLoadIconDll:Clean">
-        <MSBuild Projects="pLoadIconDll.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="pLoadIconDll:Make">
-        <MSBuild Projects="pLoadIconDll.dproj" Targets="Make"/>
-    </Target>
     <Target Name="pMakeIconDll">
         <MSBuild Projects="MakeIconDll\pMakeIconDll.dproj"/>
     </Target>
@@ -35,14 +26,23 @@
     <Target Name="pMakeIconDll:Make">
         <MSBuild Projects="MakeIconDll\pMakeIconDll.dproj" Targets="Make"/>
     </Target>
+    <Target Name="pLoadIconDll">
+        <MSBuild Projects="LoadIconDll\pLoadIconDll.dproj"/>
+    </Target>
+    <Target Name="pLoadIconDll:Clean">
+        <MSBuild Projects="LoadIconDll\pLoadIconDll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pLoadIconDll:Make">
+        <MSBuild Projects="LoadIconDll\pLoadIconDll.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="pLoadIconDll;pMakeIconDll"/>
+        <CallTarget Targets="pMakeIconDll;pLoadIconDll"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="pLoadIconDll:Clean;pMakeIconDll:Clean"/>
+        <CallTarget Targets="pMakeIconDll:Clean;pLoadIconDll:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="pLoadIconDll:Make;pMakeIconDll:Make"/>
+        <CallTarget Targets="pMakeIconDll:Make;pLoadIconDll:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
