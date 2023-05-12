@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{79FE7260-9D4A-4B19-898D-987CBC50EC3B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="pLoadIconDll.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MakeIconDll\pMakeIconDll.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="pLoadIconDll">
+        <MSBuild Projects="pLoadIconDll.dproj"/>
+    </Target>
+    <Target Name="pLoadIconDll:Clean">
+        <MSBuild Projects="pLoadIconDll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pLoadIconDll:Make">
+        <MSBuild Projects="pLoadIconDll.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="pMakeIconDll">
+        <MSBuild Projects="MakeIconDll\pMakeIconDll.dproj"/>
+    </Target>
+    <Target Name="pMakeIconDll:Clean">
+        <MSBuild Projects="MakeIconDll\pMakeIconDll.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pMakeIconDll:Make">
+        <MSBuild Projects="MakeIconDll\pMakeIconDll.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="pLoadIconDll;pMakeIconDll"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="pLoadIconDll:Clean;pMakeIconDll:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="pLoadIconDll:Make;pMakeIconDll:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
